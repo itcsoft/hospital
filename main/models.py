@@ -3,6 +3,7 @@ from django.db.models.fields.related import ForeignKey
 
 # Create your models here.
 class Hospital(models.Model):
+    photo = models.ImageField(upload_to = 'main', null=True, blank=True)
     name = models.CharField('Название',max_length=100) 
     REGION = [
         ('Osh', 'Ошская'),
@@ -74,8 +75,8 @@ class Doctor(models.Model):
         return self.name
     
     class Meta:
-        verbose_name = 'Лечающий врач'
-        verbose_name_plural = 'Лечающие врачи'
+        verbose_name = 'Лечащий врач'
+        verbose_name_plural = 'Лечащие врачи'
 
     
 class Patients(models.Model):
@@ -85,7 +86,7 @@ class Patients(models.Model):
     phone = models.CharField('Номер телефона', max_length=10)
     reason = models.CharField('Причина обращения в больницу', max_length=255)
     hospital = models.ForeignKey('Hospital', on_delete=models.PROTECT, verbose_name='Больница')
-    doctor = models.ForeignKey('Doctor', on_delete=models.PROTECT, verbose_name='Лечающий врач', related_name='counts')
+    doctor = models.ForeignKey('Doctor', on_delete=models.PROTECT, verbose_name='Лечащий врач', related_name='counts')
     nurse = models.ForeignKey('Nurses', on_delete=models.PROTECT, verbose_name='Медсестра')
 
 
