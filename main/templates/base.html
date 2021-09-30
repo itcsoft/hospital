@@ -9,7 +9,7 @@
 </head>
 <body>
     
-    <header>
+    <!-- <header>
       <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
           <div class="row">
@@ -41,8 +41,44 @@
           </button>
         </div>
       </div>
+    </header> -->
+
+    
+    <header class="p-3 bg-dark text-white">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <a href="{% url 'index' %}" class="navbar-brand text-white d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+              </svg>
+            <strong>&nbsp;HPal</strong>
+          </a>
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="{% url 'index' %}" class="nav-link px-2 text-white">Главное</a></li>
+            <li><a href="#hospitals" class="nav-link px-2 text-white">Больница</a></li>
+            
+          </ul>
+  
+          <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+            <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+          </form> -->
+          
+          {% if request.user.is_authenticated %}
+          <form method="GET" action="{% url 'signout' %}" class="text-end">
+            <button type="submit" class="btn btn-outline-light me-2">Выход</button>
+          </form>
+          {% else %}
+          <form method="GET" action="{% url 'signin' %}" class="text-end">
+            <button type="submit" class="btn btn-outline-light me-2">Вход</button>
+          </form>
+
+          <form method="GET" action="{% url 'register' %}" class="text-end">
+            <button type="submit" class="btn btn-primary">Регистрация</button>
+          </form>
+          {% endif %}
+        </div>
+      </div>
     </header>
-   
     {% block content %} {% endblock %}
     
     <footer class="text-muted py-5">
