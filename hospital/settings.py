@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-2mn0*xub&@h#nz1c*95ei5-7t#9v#1uf65a+epei3!3%7eetwb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+
+import dj_database_url
+
+db_from_env = dj_database_url.config()
 
 
 # Application definition
@@ -41,6 +46,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -74,12 +80,25 @@ WSGI_APPLICATION = 'hospital.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd1pl1abqi5b6nk',
+        'USER': 'pvtnnfyoadnxdn',
+        'PASSWORD': '408df6198cf08f9d6c268a84367a90bf2d7150f9b3b8a56d50b0dd745399377c',
+        'HOST': 'ec2-44-198-215-235.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
+
+
 
 
 # Password validation
